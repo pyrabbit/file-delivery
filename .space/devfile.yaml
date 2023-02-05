@@ -1,0 +1,10 @@
+schemaVersion: 2.2.0
+attributes:
+  space:
+    instanceType: regular
+    editor:
+      type: RubyMine
+components:
+- name: dev-container
+  container:
+    image: ruby:3.2.0
