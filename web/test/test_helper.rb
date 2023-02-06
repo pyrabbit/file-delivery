@@ -6,6 +6,7 @@ require "rails/test_help"
 
 require "minitest/autorun"
 require "webmock/minitest"
+require "shopify_app/test_helpers/all"
 
 class ActiveSupport::TestCase
   # Run tests in parallel with specified workers

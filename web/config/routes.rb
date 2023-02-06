@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get "/api", to: redirect(path: "/") # Needed because our engine root is /api but that breaks FE routing
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
+  get "/api/health", to: "health#index"
   get "/api/products/count", to: "products#count"
   get "/api/products/create", to: "products#create"
 
