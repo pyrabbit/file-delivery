@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-ENV["RAILS_ENV"] ||= "test"
-require_relative "../config/environment"
-require "rails/test_help"
+ENV['RAILS_ENV'] ||= 'test'
+require_relative '../config/environment'
+require 'rails/test_help'
 
-require "minitest/autorun"
-require "webmock/minitest"
-require "shopify_app/test_helpers/all"
+require 'minitest/autorun'
+require 'webmock/minitest'
+require 'shopify_app/test_helpers/all'
 
 class ActiveSupport::TestCase
   # Run tests in parallel with specified workers

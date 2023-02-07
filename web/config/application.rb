@@ -14,7 +14,7 @@ module ShopifyAppTemplateRuby
     config.load_defaults(7.0)
 
     config.assets.prefix = "/api/assets"
-
+    config.active_storage.routes_prefix = "/api"
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

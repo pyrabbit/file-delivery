@@ -6,18 +6,41 @@ import {
   Image,
   Stack,
   Link,
-  Heading,
+  Heading, SkeletonPage,
 } from "@shopify/polaris";
 import { TitleBar } from "@shopify/app-bridge-react";
-
 import { trophyImage } from "../assets";
-
-import { ProductsCard } from "../components";
+import { FilesCard } from "../components";
+import {useState} from "react";
+import {useAppQuery, useAuthenticatedFetch} from "../hooks/index.js";
 
 export default function HomePage() {
+  const emptyToastProps = { content: null };
+  const [isLoading, setIsLoading] = useState(true);
+  const [toastProps, setToastProps] = useState(emptyToastProps);
+  const fetch = useAuthenticatedFetch();
+
+  const {
+    data,
+    refetch: refetchFiles,
+    isLoading: isLoadingFiles,
+    isRefetching: isRefetchingFiles,
+  } = useAppQuery({
+    url: "/api/files",
+    reactQueryOptions: {
+      onSuccess: () => {
+        setIsLoading(false);
+      },
+    },
+  });
+
+  if (isLoading) {
+    return <SkeletonPage/>
+  }
+
   return (
-    <Page narrowWidth>
-      <TitleBar title="App name" primaryAction={null} />
+      <Page>
+      <TitleBar title="Getting Started" primaryAction={null} />
       <Layout>
         <Layout.Section>
           <Card sectioned>
@@ -78,7 +101,7 @@ export default function HomePage() {
           </Card>
         </Layout.Section>
         <Layout.Section>
-          <ProductsCard />
+          <FilesCard />
         </Layout.Section>
       </Layout>
     </Page>
