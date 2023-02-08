@@ -2,6 +2,6 @@
 
 class HealthController < AuthenticatedController
   def index
-    render :nothing, status: :ok
+    render plain: 'Ok!'
   end
 end

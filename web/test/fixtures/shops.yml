@@ -1,0 +1,4 @@
+pizzabolt:
+  shopify_domain: pizzabolt.myshopify.com
+  shopify_token: supersecrettoken
+  access_scopes: write_products

@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get '/api/health', to: 'health#index'
   get '/api/files', to: 'files#index'
+  post '/api/files', to: 'files#create'
+  delete '/api/files/:id', to: 'files#destroy'
   get '/api/products/count', to: 'products#count'
   get '/api/products/create', to: 'products#create'
 
