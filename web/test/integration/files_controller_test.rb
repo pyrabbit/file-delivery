@@ -21,18 +21,18 @@ class FilesControllerTest < ActionController::TestCase
 
   test 'file upload success' do
     setup_shopify_session session_id: '1', shop_domain: @shop.shopify_domain
-    file = fixture_file_upload('/earth.gif', 'image/gif')
+    product_files = [fixture_file_upload('/earth.gif', 'image/gif')]
     assert_difference -> { @shop.product_files.count }, 1 do
-      post :create, params: { files: file }
+      post :create, params: { shop: { product_files: } }
     end
     assert_response :success
   end
 
   test 'file deletion success' do
     setup_shopify_session session_id: '1', shop_domain: @shop.shopify_domain
-    file = fixture_file_upload('/earth.gif', 'image/gif')
+    product_files = [fixture_file_upload('/earth.gif', 'image/gif')]
     assert_difference -> { @shop.product_files.count }, 1 do
-      post :create, params: { files: file }
+      post :create, params: { shop: { product_files: } }
     end
     assert_response :success
     assert_difference -> { ActiveStorage::Attachment.count }, -1 do
