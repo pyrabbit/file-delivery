@@ -6,19 +6,25 @@ class FilesController < AuthenticatedController
   end
 
   def create
-    current_shop.product_files.attach(params[:files])
-    render json: {message: 'Thanks for the file dude.'}.as_json
+    if current_shop.update(shop_params)
+      render json: { message: 'Thanks for the file dude.' }.as_json
+    else
+      render json: { message: 'Failed to update shop.' }.as_json, status: :unprocessable_entity
+    end
   end
 
   def destroy
     product = current_shop.product_files.find(params[:id])
-    product.purge_later
-    render json: {message: 'The file is totally gone now.'}.as_json
+    if product.purge
+      render json: { message: 'The file is totally gone now.' }.as_json
+    else
+      render json: { message: 'Failed to delete file.' }.as_json, status: :unprocessable_entity
+    end
   end
 
   private
 
-  def file_params
-    params.permit(files: [])
+  def shop_params
+    params.fetch(:shop, {}).permit(product_files: [])
   end
 end

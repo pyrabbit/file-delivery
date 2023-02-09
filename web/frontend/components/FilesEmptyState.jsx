@@ -29,15 +29,16 @@ function DropZoneExample() {
     const handleDropZoneDrop = useCallback( async (_dropFiles, acceptedFiles, _rejectedFiles) => {
             setFiles((files) => [...files, ...acceptedFiles]);
             let formData = new FormData();
-            formData.append('files', acceptedFiles)
-            let options = {
+            for(let file in acceptedFiles) {
+                formData.append('shop[product_files][]', file)
+            }
+            await fetch('/api/files', {
                 method: 'POST',
                 body: formData,
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
-            };
-            await fetch('/api/files', options);
+            });
         },
         [],
     );
