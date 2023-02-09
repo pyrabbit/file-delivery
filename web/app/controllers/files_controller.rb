@@ -6,7 +6,7 @@ class FilesController < AuthenticatedController
   end
 
   def create
-    if current_shop.update(shop_params)
+    if current_shop.update product_files: params[:product_files]
       render json: { message: 'Thanks for the file dude.' }.as_json
     else
       render json: { message: 'Failed to update shop.' }.as_json, status: :unprocessable_entity
@@ -20,11 +20,5 @@ class FilesController < AuthenticatedController
     else
       render json: { message: 'Failed to delete file.' }.as_json, status: :unprocessable_entity
     end
-  end
-
-  private
-
-  def shop_params
-    params.fetch(:shop, {}).permit(product_files: [])
   end
 end
