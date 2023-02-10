@@ -6,11 +6,10 @@ class FilesController < AuthenticatedController
   end
 
   def create
-    if current_shop.update product_files: params[:product_files]
-      render json: { message: 'Thanks for the file dude.' }.as_json
-    else
-      render json: { message: 'Failed to update shop.' }.as_json, status: :unprocessable_entity
+    file_params[:product_files].each do |file|
+      current_shop.product_files.attach file
     end
+    render json: { message: 'Thanks for the files bro.' }.as_json
   end
 
   def destroy
@@ -20,5 +19,11 @@ class FilesController < AuthenticatedController
     else
       render json: { message: 'Failed to delete file.' }.as_json, status: :unprocessable_entity
     end
+  end
+
+  private
+
+  def file_params
+    params.require(:shop).permit(product_files: [])
   end
 end

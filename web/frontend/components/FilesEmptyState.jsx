@@ -42,17 +42,13 @@ function DropZoneExample(props) {
     const handleDropZoneDrop = useCallback( async (_dropFiles, acceptedFiles, _rejectedFiles) => {
             setFiles((files) => [...files, ...acceptedFiles]);
             let formData = new FormData();
-            for(let file in acceptedFiles) {
-                formData.append('product_files[]', file)
+            for(let i = 0; i < acceptedFiles.length; i++) {
+                formData.append('shop[product_files][]', acceptedFiles[i])
             }
-            var response = await fetch('/api/files', {
+            const response = await fetch('/api/files', {
                 method: 'POST',
-                body: formData,
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
+                body: formData
             });
-
             if (response.ok) {
                 props.toastHandler({ content: "We successfully uploaded your files." });
                 setFiles((files) => []);
