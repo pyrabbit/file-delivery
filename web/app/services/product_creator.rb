@@ -28,9 +28,9 @@ class ProductCreator < ApplicationService
         variables: {
           input: {
             title: random_title,
-            variants: [{ price: random_price }],
-          },
-        },
+            variants: [{ price: random_price }]
+          }
+        }
       )
     end
   end

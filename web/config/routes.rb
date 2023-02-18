@@ -6,11 +6,24 @@ Rails.application.routes.draw do
   mount ShopifyApp::Engine, at: '/api'
   get '/api', to: redirect(path: '/') # Needed because our engine root is /api but that breaks FE routing
 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # GraphQL Proxy
+  post '/api/graphql', to: 'graphql#proxy'
+
+  # Health Checks
   get '/api/health', to: 'health#index'
+
+  # Files
   get '/api/files', to: 'files#index'
+  get '/api/files/:id', to: 'files#show'
   post '/api/files', to: 'files#create'
   delete '/api/files/:id', to: 'files#destroy'
+
+  # Product Attachments
+  get '/api/product_attachments', to: 'product_attachments#index'
+  post '/api/product_attachments', to: 'product_attachments#create'
+
+  # Products
+  get '/api/products', to: 'products#index'
   get '/api/products/count', to: 'products#count'
   get '/api/products/create', to: 'products#create'
 

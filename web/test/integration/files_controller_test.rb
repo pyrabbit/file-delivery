@@ -19,10 +19,25 @@ class FilesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test 'file upload success' do
+  test 'get file success' do
     setup_shopify_session session_id: '1', shop_domain: @shop.shopify_domain
     product_files = [fixture_file_upload('/earth.gif', 'image/gif')]
     assert_difference -> { @shop.product_files.count }, 1 do
+      post :create, params: { shop: { product_files: } }
+    end
+    get :show, params: { id: @shop.product_files.attachments.first.id }
+    assert_response :success
+  end
+
+  test 'file upload success' do
+    setup_shopify_session session_id: '1', shop_domain: @shop.shopify_domain
+    product_files = [
+      fixture_file_upload('/earth.gif', 'image/gif'),
+      fixture_file_upload('/minion.gif', 'image/gif'),
+      fixture_file_upload('/pb.gif', 'image/gif'),
+      fixture_file_upload('/sus.gif', 'image.gif')
+    ]
+    assert_difference -> { @shop.product_files.count }, 4 do
       post :create, params: { shop: { product_files: } }
     end
     assert_response :success

@@ -1,8 +1,14 @@
 # frozen_string_literal: true
 
 class FilesController < AuthenticatedController
+  before_action :set_file, only: [:show, :destroy]
+
   def index
     render json: current_shop.product_files.attachments.to_json(include: [:blob])
+  end
+
+  def show
+    render json: @file.as_json(include: [:blob])
   end
 
   def create
@@ -13,8 +19,7 @@ class FilesController < AuthenticatedController
   end
 
   def destroy
-    product = current_shop.product_files.find(params[:id])
-    if product.purge
+    if @file.purge
       render json: { message: 'The file is totally gone now.' }.as_json
     else
       render json: { message: 'Failed to delete file.' }.as_json, status: :unprocessable_entity
@@ -25,5 +30,9 @@ class FilesController < AuthenticatedController
 
   def file_params
     params.require(:shop).permit(product_files: [])
+  end
+
+  def set_file
+    @file = current_shop.product_files.find(params[:id])
   end
 end

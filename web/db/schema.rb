@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_06_194151) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_10_191515) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,6 +39,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_06_194151) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "product_attachments", force: :cascade do |t|
+    t.integer "shop_id", null: false
+    t.integer "active_storage_attachment_id", null: false
+    t.string "product_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["active_storage_attachment_id"], name: "index_product_attachments_on_active_storage_attachment_id"
+    t.index ["shop_id"], name: "index_product_attachments_on_shop_id"
+  end
+
   create_table "shops", force: :cascade do |t|
     t.string "shopify_domain", null: false
     t.string "shopify_token", null: false
@@ -50,4 +60,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_06_194151) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "product_attachments", "active_storage_attachments", on_delete: :cascade
+  add_foreign_key "product_attachments", "shops"
 end

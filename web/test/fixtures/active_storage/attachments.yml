@@ -2,3 +2,15 @@ earth_attachment:
   name: earth
   record: pizzabolt (Shop)
   blob: earth_blob
+minion_attachment:
+  name: minion
+  record: pizzabolt (Shop)
+  blob: minion_blob
+pb_attachment:
+  name: pb
+  record: pizzabolt (Shop)
+  blob: pb_blob
+sus_attachment:
+  name: sus
+  record: wallets (Shop)
+  blob: sus_blob

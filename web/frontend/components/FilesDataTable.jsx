@@ -1,39 +1,42 @@
-import {Page, Card, DataTable} from '@shopify/polaris';
+import {Page, Card, DataTable, Link} from '@shopify/polaris';
+import { humanFileSize } from "./helpers";
 import React from 'react';
 
-export function FilesDataTable() {
-    const rows = [
-        ['Emerald Silk Gown', '$875.00', 124689, 140, '$122,500.00'],
-        ['Mauve Cashmere Scarf', '$230.00', 124533, 83, '$19,090.00'],
-        [
-            'Navy Merino Wool Blazer with khaki chinos and yellow belt',
-            '$445.00',
-            124518,
-            32,
-            '$14,240.00',
-        ],
-    ];
+export function FilesDataTable(props) {
+    const rows = props.files.map(x => {
+        const created_at = new Date(x.created_at)
+        return [
+            <Link
+                removeUnderline
+                url={"/files/" + x.id}
+                key={x.id}
+            >
+                {x.blob.filename}
+            </Link>,
+            x.blob.content_type, 
+            humanFileSize(x.blob.byte_size), 
+            created_at.toLocaleString(),
+        ]
+    });
 
     return (
-        <Page title="Sales by product">
+        <Page fullWidth>
             <Card>
                 <DataTable
                     columnContentTypes={[
                         'text',
-                        'numeric',
-                        'numeric',
-                        'numeric',
-                        'numeric',
+                        'text',
+                        'text',
+                        'text'
                     ]}
                     headings={[
-                        'Product',
-                        'Price',
-                        'SKU Number',
-                        'Net quantity',
-                        'Net sales',
+                        'Filename',
+                        'Type',
+                        'Size',
+                        'Uploaded At'
                     ]}
                     rows={rows}
-                    totals={['', '', '', 255, '$155,830.00']}
+                    footerContent={`Showing ${rows.length} of ${rows.length} results`}
                 />
             </Card>
         </Page>

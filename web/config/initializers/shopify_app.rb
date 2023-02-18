@@ -59,6 +59,7 @@ Rails.application.config.after_initialize do
       log_level: :info,
       private_shop: ENV.fetch("SHOPIFY_APP_PRIVATE_SHOP", nil),
       user_agent_prefix: "ShopifyApp/#{ShopifyApp::VERSION}",
+      session_storage: ShopifyApp::SessionRepository
     )
 
     add_gdpr_webhooks

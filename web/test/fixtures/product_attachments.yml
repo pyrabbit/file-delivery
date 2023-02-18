@@ -1,0 +1,9 @@
+one:
+  shop: pizzabolt
+  active_storage_attachment: minion_attachment
+  product_id: prod_287348910012
+
+two:
+  shop: pizzabolt
+  active_storage_attachment: earth_attachment
+  product_id: prod_030947727383
