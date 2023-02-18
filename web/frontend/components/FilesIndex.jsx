@@ -6,7 +6,7 @@ import {
     useIndexResourceState,
     Link,
     EmptySearchResult,
-    SkeletonPage
+    SkeletonPage, IndexTableSelectionType
 } from "@shopify/polaris";
 import {Toast} from "@shopify/app-bridge-react";
 import {useAppQuery, useAuthenticatedFetch} from "../hooks";
@@ -30,8 +30,13 @@ export function FilesIndex() {
         isRefetching: isRefetchingFiles,
     } = useAppQuery({url: "/api/files"});
 
-    const {selectedResources, allResourcesSelected, handleSelectionChange} =
-        useIndexResourceState(data);
+    const {
+        selectedResources,
+        allResourcesSelected,
+        handleSelectionChange,
+        clearSelection,
+        removeSelectedResources
+    } = useIndexResourceState(data);
 
     const toastMarkup = toastProps.content && !isRefetchingFiles && (
         <Toast {...toastProps} onDismiss={() => setToastProps(emptyToastProps)}/>
@@ -90,7 +95,8 @@ export function FilesIndex() {
                         });
                         promises += p;
                     }
-                    Promise.all(promises).then(() => refetchFiles())
+                    Promise.all(promises).then(() => refetchFiles());
+                    clearSelection();
                 }
             },
         },
