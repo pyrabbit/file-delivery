@@ -5,10 +5,11 @@ ShopifyApp.configure do |config|
     # After a store owner uninstalls your app, Shopify invokes the APP_UNINSTALLED webhook
     # to let your app know.
     { topic: "app/uninstalled", address: "api/webhooks/app_uninstalled" },
+    { topic: "orders/create", address: "api/webhooks/orders_created" }
   ]
   config.application_name = "My Shopify App"
   config.old_secret = ""
-  config.scope = ENV.fetch("SCOPES", "write_products") # See shopify.app.toml for scopes
+  config.scope = ENV.fetch("SCOPES", "read_products,read_orders") # See shopify.app.toml for scopes
   # Consult this page for more scope options: https://shopify.dev/api/usage/access-scopes
   config.embedded_app = true
   config.after_authenticate_job = false

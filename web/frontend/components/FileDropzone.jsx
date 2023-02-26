@@ -27,7 +27,8 @@ export function FileDropzone(props) {
         },
         [],
     );
-    const validFileTypes = ['image/gif', 'image/jpeg', 'image/png'];
+
+    const validFileTypes = ['image/gif', 'image/jpeg', 'image/png', 'application/pdf'];
 
     const fileUpload = !files.length && <DropZone.FileUpload/>;
     const uploadedFiles = files.length > 0 && (

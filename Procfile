@@ -1,0 +1,1 @@
+web: ./railway-entrypoint.sh

@@ -30,6 +30,23 @@ class ProductAttachmentsController < AuthenticatedController
     end
   end
 
+  def destroy
+    active_storage_attachment_id = product_attachment_params[:active_storage_attachment_id]
+    errors = []
+    product_attachment_params[:product_ids].each do |product_id|
+      current_shop.product_attachments.where(active_storage_attachment_id:, product_id:).destroy_all
+    end
+
+    if errors.any?
+      render json: {
+        message: 'Some errors occurred during when attaching the file to your products.',
+        errors: errors.flatten
+      }
+    else
+      render json: { message: 'Your products are totally associated with files now.' }
+    end
+  end
+
   private
 
   def product_attachment_params

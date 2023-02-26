@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   # Product Attachments
   get '/api/product_attachments', to: 'product_attachments#index'
   post '/api/product_attachments', to: 'product_attachments#create'
+  delete '/api/product_attachments', to: 'product_attachments#destroy'
 
   # Products
   get '/api/products', to: 'products#index'
