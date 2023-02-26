@@ -5,7 +5,7 @@ ShopifyApp.configure do |config|
     # After a store owner uninstalls your app, Shopify invokes the APP_UNINSTALLED webhook
     # to let your app know.
     { topic: "app/uninstalled", address: "api/webhooks/app_uninstalled" },
-    { topic: "orders/create", address: "api/webhooks/orders_created" }
+    # { topic: "orders/create", address: "api/webhooks/orders_created" }
   ]
   config.application_name = "My Shopify App"
   config.old_secret = ""
