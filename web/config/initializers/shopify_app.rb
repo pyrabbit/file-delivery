@@ -2,12 +2,10 @@
 
 ShopifyApp.configure do |config|
   config.webhooks = [
-    # After a store owner uninstalls your app, Shopify invokes the APP_UNINSTALLED webhook
-    # to let your app know.
+    { topic: "orders/create", address: "api/webhooks/orders_create" },
     { topic: "app/uninstalled", address: "api/webhooks/app_uninstalled" },
-    # { topic: "orders/create", address: "api/webhooks/orders_created" }
   ]
-  config.application_name = "My Shopify App"
+  config.application_name = "File Dispatcher"
   config.old_secret = ""
   config.scope = ENV.fetch("SCOPES", "read_products,read_orders") # See shopify.app.toml for scopes
   # Consult this page for more scope options: https://shopify.dev/api/usage/access-scopes
@@ -38,7 +36,7 @@ ShopifyApp.configure do |config|
 
   config.api_key = ENV.fetch("SHOPIFY_API_KEY", "").presence
   config.secret = ENV.fetch("SHOPIFY_API_SECRET", "").presence
-  config.myshopify_domain = ENV.fetch("SHOP_CUSTOM_DOMAIN", "").presence if ENV.fetch("SHOP_CUSTOM_DOMAIN", "").present?
+  config. myshopify_domain = ENV.fetch("SHOP_CUSTOM_DOMAIN", "").presence if ENV.fetch("SHOP_CUSTOM_DOMAIN", "").present?
 
   if defined? Rails::Server
     raise("Missing SHOPIFY_API_KEY. See https://github.com/Shopify/shopify_app#requirements") unless config.api_key

@@ -3,6 +3,10 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
+  # Allow ngrok tunnels for secure Shopify OAuth redirects
+  config.hosts = (config.hosts rescue []) << /[-\w]+\.ngrok\.io/
+  # Allow Cloudflare tunnels for secure Shopify OAuth redirects
+  config.hosts = (config.hosts rescue []) << /[-\w]+\.trycloudflare\.com/
   config.hosts = begin
     config.hosts
   rescue

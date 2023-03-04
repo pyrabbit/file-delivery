@@ -5,7 +5,7 @@
   "scripts": {
     "shopify": "shopify",
     "build": "shopify app build",
-    "dev": "shopify app dev",
+    "dev": "shopify app dev --tunnel-url https://coderanger-9001.ngrok.io:443",
     "push": "shopify app push",
     "generate": "shopify app generate",
     "deploy": "shopify app deploy",

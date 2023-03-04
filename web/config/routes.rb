@@ -1,6 +1,9 @@
 # frozen_string_literal: true
+require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  mount Sidekiq::Web, at: '/sidekiq'
+
   root to: 'home#index'
 
   mount ShopifyApp::Engine, at: '/api'
@@ -27,6 +30,9 @@ Rails.application.routes.draw do
   get '/api/products', to: 'products#index'
   get '/api/products/count', to: 'products#count'
   get '/api/products/create', to: 'products#create'
+
+  # Webhooks
+
 
   # Any other routes will just render the react app
   match '*path' => 'home#index', via: [:get, :post]

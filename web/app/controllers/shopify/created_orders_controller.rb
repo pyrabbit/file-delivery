@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Shopify
-  class OrderCreatedController < WebhooksController
-    def create
+  class CreatedOrdersController < WebhooksController
+    def process
       @webhook.inspect
     end
   end
