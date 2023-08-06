@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_10_191515) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_07_005444) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -49,6 +49,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_10_191515) do
     t.index ["shop_id"], name: "index_product_attachments_on_shop_id"
   end
 
+  create_table "shop_orders", force: :cascade do |t|
+    t.integer "shop_id", null: false
+    t.integer "order_id", null: false
+    t.string "token", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shop_id"], name: "index_shop_orders_on_shop_id"
+  end
+
   create_table "shops", force: :cascade do |t|
     t.string "shopify_domain", null: false
     t.string "shopify_token", null: false
@@ -62,4 +71,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_10_191515) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "product_attachments", "active_storage_attachments", on_delete: :cascade
   add_foreign_key "product_attachments", "shops"
+  add_foreign_key "shop_orders", "shops"
 end

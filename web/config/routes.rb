@@ -31,7 +31,8 @@ Rails.application.routes.draw do
   get '/api/products/count', to: 'products#count'
   get '/api/products/create', to: 'products#create'
 
-  # Webhooks
+  # Orders
+  get '/api/shop_orders/:token/files/:id', to: 'shop_orders#show', as: 'shop_orders'
 
 
   # Any other routes will just render the react app

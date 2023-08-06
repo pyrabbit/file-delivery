@@ -3,6 +3,6 @@ pizzabolt:
   shopify_token: supersecrettoken
   access_scopes: write_products
 wallets:
-  shopify_domain: wallets.myshopify.com
+  shopify_domain: shop.myshopify.com
   shopify_token: supersecrettoken
   access_scopes: write_products
